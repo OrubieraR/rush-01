@@ -1,47 +1,67 @@
-int n = 0;
-while (n < 4)
+#include <stdio.h>
+
+int main()
 {
-    int i = 0;
-    while (i < 4)
+    int row_result[4][4];             // Unified grid
+    int row_top[4] = {4, 2, 3, 1};    // Clues from top
+    int row_bottom[4] = {1, 1, 2, 3}; // Clues from bottom
+
+    // Initialize grid to 0
+    for (int i = 0; i < 4; i++)
     {
-        col_result[i][n] = 0; // initialize column
-        i++;
+        for (int j = 0; j < 4; j++)
+        {
+            row_result[i][j] = 0;
+        }
     }
 
-    // Rule 1: clue is 4 from top → 1 to 4
-    if (row_top[n] == 4)
+    // Apply vertical clues to columns
+    for (int col = 0; col < 4; col++)
     {
-        col_result[0][n] = 1;
-        col_result[1][n] = 2;
-        col_result[2][n] = 3;
-        col_result[3][n] = 4;
-    }
-    // Rule 1: clue is 4 from bottom → 4 to 1
-    else if (row_bottom[n] == 4)
-    {
-        col_result[0][n] = 4;
-        col_result[1][n] = 3;
-        col_result[2][n] = 2;
-        col_result[3][n] = 1;
-    }
-    else if (row_top[n] == 2 && row_bottom[n] == 1)
-    {
-        col_result[0][n] = 3;
-        col_result[3][n] = 4;
-    }
-    else if (row_top[n] == 3 && row_bottom[n] == 2)
-    {
-        col_result[0][n] = 4;
-        col_result[2][n] = 4;
-    }
-    else if (row_top[n] == 2 && row_bottom[n] == 3)
-    {
-        col_result[1][n] = 4;
-    }
-    else if (row_top[n] == 1)
-    {
-        col_result[n][n] = 4; // same index logic as before
+        if (row_top[col] == 4)
+        {
+            row_result[0][col] = 1;
+            row_result[1][col] = 2;
+            row_result[2][col] = 3;
+            row_result[3][col] = 4;
+        }
+        else if (row_bottom[col] == 4)
+        {
+            row_result[0][col] = 4;
+            row_result[1][col] = 3;
+            row_result[2][col] = 2;
+            row_result[3][col] = 1;
+        }
+        else if (row_top[col] == 2 && row_bottom[col] == 1)
+        {
+            row_result[0][col] = 3;
+            row_result[3][col] = 4;
+        }
+        else if (row_top[col] == 3 && row_bottom[col] == 2)
+        {
+            row_result[0][col] = 4;
+            row_result[2][col] = 4;
+        }
+        else if (row_top[col] == 2 && row_bottom[col] == 3)
+        {
+            row_result[1][col] = 4;
+        }
+        else if (row_top[col] == 1)
+        {
+            row_result[0][col] = 4;
+        }
     }
 
-    n++;
+    // Print the grid
+    printf("Grid after applying vertical clues:\n");
+    for (int row = 0; row < 4; row++)
+    {
+        for (int col = 0; col < 4; col++)
+        {
+            printf("%d ", row_result[row][col]);
+        }
+        printf("\n");
+    }
+
+    return 0;
 }
