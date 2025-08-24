@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 {
     if (argc < 2)
     {
-        printf("Se necesita al menos un argumento.\n");
+        printf("Almost one argument is needed.\n");
         return 1;
     }
 
@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     char middle_array[31];
     int top_row1[4], bottom_row2[4], left_row3[4], right_row4[4];
 
-    // Copiar caracteres no espacios a middle_array
+    // Copy caracters without spaces.
     while (argv[1][i] != '\0' && j < 30)
     {
         if (argv[1][i] != ' ')
